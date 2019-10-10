@@ -13,6 +13,11 @@
   "devDependencies": {
     "@grafana/data": "latest",
     "@grafana/toolkit": "latest",
-    "@grafana/ui": "latest"
+    "@grafana/ui": "latest",
+    "@types/grafana": "https://git@github.com/CorpGlory/types-grafana.git"
+  },
+  "dependencies": {
+    "davi-js": "^5.3.0",
+    "pivotal-ui": "^18.1.1"
   }
 }

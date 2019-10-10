@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+#  grafana-controller:
+#    build: ./cmd/grafana-controller
+#    container_name: grafana-controller
+#    environment:
+#      REGISTRY_CN: indicator-registry
+#      REGISTRY_URL: 35.202.98.87
+#      REGISTRY_PORT: 10567
+#    volumes:
+#      - ./cert:/cert # map to the local cert directory
+#      - shared:/srv/dashboards # a shared volume between controller and grafana
+  grafana:
+    build:
+      context: .
+      dockerfile: dockerfile/grafana.Dockerfile
+    container_name: grafana-plugin-dev
+    ports:
+    - "3000:3000"
+    environment:
+      GF_SERVER_ROOT_URL: "http://localhost:3000"
+      GF_AUTH_GENERIC_OAUTH_NAME: "UAA"
+      GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
+      GF_AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP: "true"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID: "grafana"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: "moistchunks"
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://login.sys.carmelbythesea.cf-app.com/oauth/authorize"
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "https://login.sys.carmelbythesea.cf-app.com/oauth/token"
+      GF_AUTH_GENERIC_OAUTH_API_URL: "https://login.sys.carmelbythesea.cf-app.com/userinfo"
+      GF_AUTH_GENERIC_OAUTH_SCOPES: "openid uaa.resource doppler.firehose logs.admin cloud_controller.read"
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning
+      - ./dist:/var/lib/grafana/plugins/dev-panel

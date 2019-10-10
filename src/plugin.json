@@ -1,12 +1,12 @@
 {
   "type": "panel",
-  "name": "Simple Panel",
-  "id": "myorgid-simple-panel",
+  "name": "Davi",
+  "id": "huan-simple-panel",
 
   "info": {
     "description": "Simple React Panel",
     "author": {
-      "name": "Your Name"
+      "name": "Huan Wang"
     },
     "keywords": ["Simple"],
     "logos": {
