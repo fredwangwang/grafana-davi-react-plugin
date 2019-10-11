@@ -38,17 +38,28 @@ function transformer(input: PanelData): any {
 export class MyPanel extends Component<PanelProps, PanelState> {
     readonly state = initialState;
 
-    componentDidMount(): void {
-        appEvents.on('graph-hover', (evt: any) => {
-            console.log(evt);
-            const pos = evt.pos;
-            const x = pos.x;
-            this.setState({...this.state, selectedIndex: x})
-        });
+    panelID: number;
+    lastPanel: any;
 
-        appEvents.on('graph-hover-clear', () => {
-            this.setState({...this.state, selectedIndex: undefined})
-        })
+    constructor(props: PanelProps) {
+        super(props);
+
+        this.panelID = props.id;
+
+        this.updateCrosshair = this.updateCrosshair.bind(this);
+        this.clearCrosshair = this.clearCrosshair.bind(this);
+    }
+
+    updateCrosshair(evt: any) {
+        console.log(evt);
+        this.lastPanel = evt.panel;
+        const pos = evt.pos;
+        const x = pos.x;
+        this.setState({selectedIndex: x});
+    }
+
+    clearCrosshair() {
+        this.setState({selectedIndex: undefined});
     }
 
     onCrosshairHover(x: number | undefined) {
@@ -61,11 +72,22 @@ export class MyPanel extends Component<PanelProps, PanelState> {
                     y1: 1000,
                     panelRelY: 0.5
                 },
-                panel: {id: this.props.id}
+                panel: {...this.lastPanel, id: this.panelID}
             })
+            console.log("sync message emitted")
         } else {
             appEvents.emit('graph-hover-clear');
         }
+    }
+
+    componentDidMount(): void {
+        appEvents.on('graph-hover', this.updateCrosshair);
+        appEvents.on('graph-hover-clear', this.clearCrosshair);
+    }
+
+    componentWillUnmount(): void {
+        appEvents.off('graph-hover', this.updateCrosshair);
+        appEvents.off('graph-hover-clear', this.clearCrosshair);
     }
 
     render() {
