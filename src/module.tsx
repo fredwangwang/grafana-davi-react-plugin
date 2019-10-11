@@ -1,17 +1,28 @@
 import React, { PureComponent } from 'react';
-import { PanelProps, PanelPlugin } from '@grafana/ui';
-import * as reactRedux from 'react-redux';
+import { PanelPlugin, PanelProps } from '@grafana/ui';
+import { Provider } from 'react-redux';
+// import * as redux from 'redux';
+//
+// const reducer = (state: any, action: any) => {
+//   return state;
+// };
+
+const store = undefined;
 
 export class MyPanel extends PureComponent<PanelProps> {
   render() {
-    return <div>Hello from my panel</div>;
+    return (
+      // @ts-ignore
+      <Provider store={store}>
+        <div>Hello from my panel</div>
+      </Provider>
+    );
   }
 }
 
-const mapstp = (state: any) => ({
-  ...state,
-});
-
-reactRedux.connect(mapstp)(MyPanel);
+// const mapstp = (state: any) => ({
+//     ...state,
+// });
+//
 
 export const plugin = new PanelPlugin(MyPanel);
