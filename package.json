@@ -11,13 +11,16 @@
   "author": "Grafana Labs",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@grafana/data": "latest",
-    "@grafana/toolkit": "latest",
-    "@grafana/ui": "latest",
-    "@types/grafana": "https://git@github.com/CorpGlory/types-grafana.git"
+    "@grafana/data": "6.4.0",
+    "@grafana/toolkit": "6.4.0",
+    "@grafana/ui": "6.4.0",
+    "@types/grafana": "https://git@github.com/CorpGlory/types-grafana.git",
+    "@types/react-redux": "7.1.2"
   },
   "dependencies": {
-    "davi-js": "^5.3.0",
-    "pivotal-ui": "^18.1.1"
+    "davi-js": "5.3.0",
+    "react-redux": "7.1.1",
+    "redux": "4.0.4",
+    "react": "16.8.6"
   }
 }

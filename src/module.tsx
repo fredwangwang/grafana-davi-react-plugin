@@ -3,6 +3,7 @@ import {PanelData, PanelPlugin, PanelProps} from '@grafana/ui';
 import {appEvents} from "grafana/app/core/core";
 import {Container, SelectedIndexProvider, StepChart} from "davi-js"
 import {FieldType} from "@grafana/data";
+import { connect } from "react-redux";
 
 
 const initialState = {
@@ -76,7 +77,7 @@ export class MyPanel extends Component<PanelProps, PanelState> {
         return (
             <div className="chart_container">
                 <Container
-                    title={{text: "Davi Yeesss"}}
+                    title={{text: "Davi Yeesss!!!"}}
                     iconsVisible={true}
                 >
                     <SelectedIndexProvider value={this.state.selectedIndex}>
@@ -94,4 +95,10 @@ export class MyPanel extends Component<PanelProps, PanelState> {
     }
 }
 
-export const plugin = new PanelPlugin(MyPanel);
+function mapStateToProps(state: any) {
+  return {...state}
+}
+
+const connected = connect(mapStateToProps)(MyPanel);
+
+export const plugin = new PanelPlugin(connected);
