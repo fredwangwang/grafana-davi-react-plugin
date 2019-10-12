@@ -3,35 +3,43 @@ import { PanelPlugin, PanelProps } from '@grafana/ui';
 import { appEvents } from 'grafana/app/core/core';
 import { Container, SelectedIndexProvider, StepChart } from 'davi-js';
 import { transforme } from './data/transform';
+import { connect } from "react-redux";
+import { DashboardModel } from "grafana/app/features/dashboard/model";
 
 const initialState = {
   showDocs: false,
   selectedIndex: 0,
 };
 
-interface PanelState {
+interface DaviPanelProps extends PanelProps {
+  dashboard: any
+}
+
+interface DaviPanelState {
   showDocs: boolean;
   selectedIndex: number | undefined;
 }
 
-export class MyPanel extends Component<PanelProps, PanelState> {
+export class MyPanel extends Component<DaviPanelProps, DaviPanelState> {
   readonly state = initialState;
 
   panelID: number;
-  lastPanel: any;
+  dashboard: DashboardModel;
 
-  constructor(props: PanelProps) {
+  constructor(props: DaviPanelProps) {
     super(props);
 
     this.panelID = props.id;
+    this.dashboard = props.dashboard.model;
 
     this.updateCrosshair = this.updateCrosshair.bind(this);
     this.clearCrosshair = this.clearCrosshair.bind(this);
+
+    console.log("dashboard", this.dashboard)
   }
 
   updateCrosshair(evt: any) {
     console.log(evt);
-    this.lastPanel = evt.panel;
     const pos = evt.pos;
     const x = pos.x;
     this.setState({ selectedIndex: x });
@@ -51,7 +59,7 @@ export class MyPanel extends Component<PanelProps, PanelState> {
           y1: 1000,
           panelRelY: 0.5,
         },
-        panel: { ...this.lastPanel, id: this.panelID },
+        panel: { id: this.panelID },
       });
       console.log('sync message emitted');
     } else {
@@ -88,4 +96,8 @@ export class MyPanel extends Component<PanelProps, PanelState> {
   }
 }
 
-export const plugin = new PanelPlugin(MyPanel);
+const mapStateToProps = (state: any) => ({
+  dashboard: state.dashboard
+});
+
+export const plugin = new PanelPlugin(connect(mapStateToProps)(MyPanel));
