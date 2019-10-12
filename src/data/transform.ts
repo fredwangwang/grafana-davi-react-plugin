@@ -1,7 +1,7 @@
 import { PanelData } from '@grafana/ui';
 import { FieldType } from '@grafana/data';
 
-export function transforme(input: PanelData): any {
+export function transform(input: PanelData): any {
   return input.series.map(s => {
     if (s.fields.length !== 2) {
       console.error('something is wrong...', s.fields);
