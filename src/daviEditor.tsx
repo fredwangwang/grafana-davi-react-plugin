@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { FormLabel, PanelEditorProps, PanelOptionsGroup, Select } from '@grafana/ui';
+import { FormLabel, PanelEditorProps, PanelOptionsGrid, PanelOptionsGroup, Select } from '@grafana/ui';
 import { DaviChartTypeChoices, DaviOptions } from './options';
 import ContainerEditor from './editor/containerEditor';
 
@@ -24,21 +24,24 @@ export default class DaviEditor extends PureComponent<PanelEditorProps<DaviOptio
     return (
       <>
         <ContainerEditor editor={this} />
-        <PanelOptionsGroup title="Chart">
-          <div className="form-field">
-            <FormLabel width={8}>Display mode</FormLabel>
-            <Select
-              width={12}
-              options={DaviChartTypeChoices}
-              defaultValue={DaviChartTypeChoices[0]}
-              onChange={thisOnChartTypeChange}
-              value={DaviChartTypeChoices.find(x => x.value === this.props.options.chart_type)}
-            />
-          </div>
-        </PanelOptionsGroup>
-        <PanelOptionsGroup title="c3">
-          <div>3</div>
-        </PanelOptionsGroup>
+
+        <PanelOptionsGrid cols={2}>
+          <PanelOptionsGroup title="Chart">
+            <div className="form-field">
+              <FormLabel width={8}>Display mode</FormLabel>
+              <Select
+                width={12}
+                options={DaviChartTypeChoices}
+                defaultValue={DaviChartTypeChoices[0]}
+                onChange={thisOnChartTypeChange}
+                value={DaviChartTypeChoices.find(x => x.value === this.props.options.chart_type)}
+              />
+            </div>
+          </PanelOptionsGroup>
+          <PanelOptionsGroup title="c3">
+            <div>3</div>
+          </PanelOptionsGroup>
+        </PanelOptionsGrid>
       </>
     );
   }

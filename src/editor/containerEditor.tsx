@@ -2,7 +2,7 @@ import React from 'react';
 import { FormField, PanelOptionsGroup } from '@grafana/ui';
 import { IDaviEditor } from 'daviEditor';
 
-interface IContainerEditor {
+interface ContainerEditor {
   editor: IDaviEditor;
 }
 
@@ -20,7 +20,7 @@ function onDescriptionChange(this: IDaviEditor, evt: any) {
   });
 }
 
-const containerEditor = ({ editor }: IContainerEditor) => {
+const containerEditor = ({ editor }: ContainerEditor) => {
   const thisOnTitleChange = onTitleChange.bind(editor);
   const thisOnDescriptionChange = onDescriptionChange.bind(editor);
 

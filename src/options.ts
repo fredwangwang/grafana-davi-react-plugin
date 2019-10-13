@@ -5,6 +5,7 @@ export enum DaviChartType {
   STEP = 'Step Chart',
   AREA = 'Area Chart',
   HEATMAP = 'Heatmap Chart',
+  STATUS = 'Status Chart',
 }
 
 export const DaviChartTypeChoices: Array<SelectableValue<DaviChartType>> = [
@@ -12,6 +13,7 @@ export const DaviChartTypeChoices: Array<SelectableValue<DaviChartType>> = [
   { value: DaviChartType.STEP, label: DaviChartType.STEP },
   { value: DaviChartType.AREA, label: DaviChartType.AREA },
   { value: DaviChartType.HEATMAP, label: DaviChartType.HEATMAP },
+  { value: DaviChartType.STATUS, label: DaviChartType.STATUS },
 ];
 
 export interface DaviOptions {
