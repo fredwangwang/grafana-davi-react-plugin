@@ -46,9 +46,12 @@ class DaviPanel extends PureComponent<DaviPanelProps<DaviOptions>, DaviPanelStat
   constructor(props: any) {
     super(props);
 
+    console.log(config);
     if (config.theme.isDark) {
+      console.log('set davi dark theme');
       setTheme('dark');
     } else {
+      console.log('set davi light theme');
       setTheme('light');
     }
 
