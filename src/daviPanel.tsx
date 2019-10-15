@@ -3,9 +3,10 @@ import { PanelProps } from '@grafana/ui';
 import { DashboardModel } from 'grafana/app/features/dashboard/model';
 import { appEvents } from 'grafana/app/core/core';
 import { transform } from './data/transform';
-import { AreaChart, Container, HeatmapChart, IZoom, LineChart, SelectedIndexProvider, StatusChart, StepChart } from 'davi-js';
+import { AreaChart, Container, HeatmapChart, IZoom, LineChart, SelectedIndexProvider, setTheme, StatusChart, StepChart } from 'davi-js';
 // import { connect } from 'react-redux';
 import { DaviChartType, DaviOptions } from './options';
+import config from 'grafana/app/core/config';
 
 const initialState = {
   showDocs: false,
@@ -44,6 +45,12 @@ class DaviPanel extends PureComponent<DaviPanelProps<DaviOptions>, DaviPanelStat
 
   constructor(props: any) {
     super(props);
+
+    if (config.theme.isDark) {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
 
     this.dashboard = props.dashboard && props.dashboard.model;
 
