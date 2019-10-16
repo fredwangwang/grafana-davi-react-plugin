@@ -1,10 +1,10 @@
 {
   "type": "panel",
   "name": "Davi",
-  "id": "huan-simple-panel",
+  "id": "huan-davi-panel",
 
   "info": {
-    "description": "Simple React Panel",
+    "description": "Data visualization plugin panels",
     "author": {
       "name": "Huan Wang"
     },
